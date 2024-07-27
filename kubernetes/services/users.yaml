@@ -1,0 +1,19 @@
+# kubernetes apiVersion and what obj are you creatinw with the kubernetes api.
+apiVersion: v1
+kind: Service
+metadata:
+  name: serv-user
+  labels:
+    app: taskmgmt
+
+# spec always there
+spec:
+  type: LoadBalancer
+  selector:  # need to select which pods to cast service spell on.
+    pod_identifier: userpod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depl-auth
+  labels:
+    app: taskmgmt
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod_identifier: authpod
+  template:
+    metadata:
+      labels:
+        app: taskmgmt
+        pod_identifier: authpod
+    spec:
+      containers:
+        - name: auth-container
+          image: vidhup/auth
+          imagePullPolicy: Always

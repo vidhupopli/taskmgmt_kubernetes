@@ -1,0 +1,28 @@
+version: "3"
+services:
+  tasks:
+    image: vidhup/tasks:latest
+    build: ./tasks-api
+    container_name: tasks
+    ports: 
+      - "8000:8000"
+    environment:
+      TASKS_FOLDER: tasks
+  auth:
+    image: vidhup/auth:latest
+    build: ./auth-api
+    container_name: auth
+  users:
+    image: vidhup/users:latest
+    build: ./users-api
+    container_name: users
+    environment:
+      - AUTH_URI=auth
+    ports: 
+      - "8080:8080"
+  frontend:
+    image: vidhup/frontend:latest
+    build: ./tasks-frontend
+    container_name: frontend
+    ports:
+      - 80:80

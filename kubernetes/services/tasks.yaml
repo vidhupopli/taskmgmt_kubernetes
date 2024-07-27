@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: serv-tasks
+  labels:
+    app: taskmgmt
+
+spec:
+  type: LoadBalancer
+  selector:
+    pod_identifier: taskpod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depl-frontend
+  labels:
+    app: taskmgmt
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod_identifier: frontendpod
+  template:
+    metadata:
+      labels:
+        pod_identifier: frontendpod
+    spec:
+      containers:
+        - name: frontend-container
+          image: vidhup/frontend
+          imagePullPolicy: Always
+

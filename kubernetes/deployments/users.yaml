@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depl-users
+  labels: 
+    app: taskmgmt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod_identifier: userpod
+  template:
+    metadata:
+      labels:
+        app: taskmgmt
+        pod_identifier: userpod
+    spec: 
+      containers:
+        - name: users-container
+          image: vidhup/users:latest
+          imagePullPolicy: Always
+          env:
+            - name: AUTH_URI
+              value: "serv-auth.default"

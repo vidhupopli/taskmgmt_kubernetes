@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depl-tasks
+  labels:
+    app: taskmgmt
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod_identifier: taskpod
+  template:
+    metadata:
+      labels:
+        app: taskmgmt
+        pod_identifier: taskpod
+    spec:
+      containers:
+        - name: tasks-container 
+          image: vidhup/tasks:latest
+          imagePullPolicy: Always
+          env:
+            - name: TASKS_FOLDER
+              value: tasks
+            - name: AUTH_URI
+              value: "serv-auth.default"
